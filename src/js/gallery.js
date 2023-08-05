@@ -13,6 +13,8 @@ const refs = {
   currentPage: 1,
 };
 
+let totalHits;
+
 const pixabayApi = new PixabayAPI();
 
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -132,8 +134,8 @@ async function toggleIntersectionObserver() {
 
 let observer = new IntersectionObserver(loadMore, {
   root: null,
-  rootMargin: '300px',
-  threshold: 1.0,
+  rootMargin: '1000px',
+  threshold: 0,
 });
 
 function loadMore(entries) {
