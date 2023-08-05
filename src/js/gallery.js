@@ -1,7 +1,10 @@
 import Notiflix from 'notiflix';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import { PixabayAPI } from './pixabay-api';
 
 const refs = {
+  body: document.querySelector('body'),
   form: document.getElementById('search-form'),
   input: document.querySelector('.search-input'),
   button: document.querySelector('.search-button'),
@@ -12,12 +15,17 @@ const refs = {
 
 const pixabayApi = new PixabayAPI();
 
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionDelay: 250,
+});
+
 // Added eventListener on 'Search Photos Form'
 refs.form.addEventListener('submit', handleSearchFormSubmit);
 
 // Function which search photo and render markup
 async function handleSearchFormSubmit(event) {
   event.preventDefault();
+  refs.body.classList.remove('animation');
   refs.currentPage = 1;
   fetchDataByInputValue();
   refs.gallery.innerHTML = '';
@@ -58,6 +66,8 @@ async function fetchDataByInputValue() {
         const photoCardsMarkup = hits.map(createPhotoCardsMarkup).join('');
         // Render the generated markup
         refs.gallery.insertAdjacentHTML('beforeend', photoCardsMarkup);
+        // Refresh SimpleLightBox
+        lightbox.refresh();
         // Toggle IntersectionObserver
         toggleIntersectionObserver();
       }, 300);
@@ -71,25 +81,35 @@ async function fetchDataByInputValue() {
 }
 
 // Function that creates the markup for a photo card
-function createPhotoCardsMarkup({ webformatURL, tags }) {
+function createPhotoCardsMarkup({
+  webformatURL,
+  largeImageURL,
+  tags,
+  likes,
+  views,
+  comments,
+  downloads,
+}) {
   return `
   <div class="photo-card">
-      <img src="${webformatURL}" alt="${tags}" loading="lazy" />
+    <a href = ${largeImageURL}>
+      <img src=${webformatURL} alt=${tags} loading="lazy" />
+    </a>
       <div class="info">
         <p class="info-item">
-          <b>Likes</b>
+          <b>&#128077;</b>${likes}
         </p>
         <p class="info-item">
-          <b>Views</b>
+          <b>&#128064;</b>${views}
         </p>
         <p class="info-item">
-          <b>Comments</b>
+          <b>&#128172;</b>${comments}
         </p>
         <p class="info-item">
-          <b>Downloads</b>
+          <b>&#128229;</b>${downloads}
         </p>
       </div>
-    </div>`;
+  </div>`;
 }
 
 // Toggle function for IntersectionObserver (add or remove)
@@ -104,6 +124,9 @@ async function toggleIntersectionObserver() {
     observer.observe(refs.target);
   } else {
     observer.unobserve(refs.target);
+    Notiflix.Notify.warning(
+      'We are sorry, but you have reached the end of search results.'
+    );
   }
 }
 
