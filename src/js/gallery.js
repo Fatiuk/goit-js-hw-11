@@ -13,8 +13,6 @@ const refs = {
   currentPage: 1,
 };
 
-let totalHits;
-
 const pixabayApi = new PixabayAPI();
 
 const lightbox = new SimpleLightbox('.gallery a', {
@@ -31,9 +29,6 @@ async function handleSearchFormSubmit(event) {
   refs.currentPage = 1;
   fetchDataByInputValue();
   refs.gallery.innerHTML = '';
-  setTimeout(() => {
-    Notiflix.Notify.info(`Hooray! We found ${totalHits} images.`);
-  }, 1000);
 }
 
 // Function to fetch data based on input value
@@ -55,8 +50,9 @@ async function fetchDataByInputValue() {
     } = await pixabayApi.fetchPhotos();
 
     console.log(hits);
-    // Update count total hits
-    totalHits = data.total;
+
+    // Count total hits and run notification
+    Notiflix.Notify.info(`Hooray! We found ${data.totalHits} images.`);
 
     // Handling the case where no results were found for the search query
     if (!hits.length) {

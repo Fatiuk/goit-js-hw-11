@@ -6,7 +6,7 @@ export class PixabayAPI {
 
   page = 1;
   query = null;
-  limit = 12;
+  limit = 40;
 
   async fetchPhotos() {
     return await axios.get(`${this.#BASE_URL}`, {
