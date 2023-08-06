@@ -126,9 +126,11 @@ async function toggleIntersectionObserver() {
     observer.observe(refs.target);
   } else {
     observer.unobserve(refs.target);
-    Notiflix.Notify.warning(
-      'We are sorry, but you have reached the end of search results.'
-    );
+    setTimeout(() => {
+      Notiflix.Notify.warning(
+        'We are sorry, but you have reached the end of search results.'
+      );
+    }, 1000);
   }
 }
 
