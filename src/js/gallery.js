@@ -5,10 +5,12 @@ import { PixabayAPI } from './pixabay-api';
 
 const refs = {
   body: document.querySelector('body'),
+  logo: document.querySelector('.logo'),
   form: document.getElementById('search-form'),
   input: document.querySelector('.search-input'),
   button: document.querySelector('.search-button'),
   gallery: document.querySelector('.gallery'),
+  instruction: document.querySelector('.instruction'),
   target: document.getElementById('js-guard'),
   currentPage: 1,
 };
@@ -28,6 +30,9 @@ refs.form.addEventListener('submit', handleSearchFormSubmit);
 async function handleSearchFormSubmit(event) {
   event.preventDefault();
   refs.body.classList.remove('animation');
+  refs.target.classList.remove('hidden');
+  refs.logo.classList.add('hidden');
+  refs.instruction.classList.add('hidden');
   refs.currentPage = 1;
   fetchDataByInputValue();
   refs.gallery.innerHTML = '';

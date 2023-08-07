@@ -9,6 +9,9 @@
   <body class="animation">
     <!-- Gallery section -->
     <section class="gallery-section">
+      <img class="logo" src="./images/logo.png" alt="logo pix query" />
+      <!-- Button scroll to top -->
+      <a id="button"></a>
       <!-- Gallery form -->
       <form class="search-form" id="search-form">
         <input
@@ -20,10 +23,19 @@
         />
         <button class="search-button" type="submit"><span>Search</span></button>
       </form>
+      <!-- Instruction -->
+      <div class="instruction">
+        <h1>😄 Welcome to our Pix Query! 📷</h1>
+        <p>
+          Our platform is designed for searching photos using keywords. To find
+          the photo you're looking for, simply enter a keyword in the search
+          field at the top of the page and press the "Search" button. 🎉🔍
+        </p>
+      </div>
       <!-- Gallery container -->
       <div class="gallery"></div>
       <!-- Target for realization of infinite scroll -->
-      <div id="js-guard"></div>
+      <div id="js-guard" class="hidden"></div>
     </section>
     <script type="module" src="./index.js"></script>
   </body>
