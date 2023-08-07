@@ -116,11 +116,8 @@ function createPhotoCardsMarkup({
 
 // Toggle function for IntersectionObserver (add or remove)
 async function toggleIntersectionObserver() {
-  // Destructuring data from response
-  const { data } = await pixabayApi.fetchPhotos();
   // Counter total pages
-  const totalHits = data.total;
-  const totalPages = Math.ceil(totalHits / pixabayApi.limit);
+  let totalPages = Math.ceil(totalHits / pixabayApi.limit);
   // Determine if there are more pages to load
   if (totalPages > refs.currentPage) {
     observer.observe(refs.target);
