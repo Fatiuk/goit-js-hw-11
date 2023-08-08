@@ -13,6 +13,7 @@ const refs = {
   gallery: document.querySelector('.gallery'),
   instruction: document.querySelector('.instruction'),
   target: document.getElementById('js-guard'),
+  footer: document.querySelector('footer'),
   currentPage: 1,
 };
 
@@ -35,6 +36,7 @@ async function handleSearchFormSubmit(event) {
   refs.target.classList.remove('hidden');
   refs.logoDiv.classList.add('hidden');
   refs.instruction.classList.add('hidden');
+  refs.footer.classList.add('hidden');
   refs.currentPage = 1;
   fetchDataByInputValue();
   refs.gallery.innerHTML = '';
