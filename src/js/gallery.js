@@ -87,7 +87,12 @@ async function fetchDataByInputValue() {
       refs.form.style.top = '35px';
     }
   } catch (error) {
-    Notiflix.Notify.failure(error.message);
+    Notiflix.Notify.warning(error.message);
+    Notiflix.Report.warning(
+      'PixQuery Warning',
+      'We are sorry,  but no photos were found for your request. Please try entering a different keyword.',
+      'Okay'
+    );
   }
 }
 
