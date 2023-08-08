@@ -1,10 +1,22 @@
 /* Reset styles */
 .search-form {
   position: absolute;
-  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   transition: top 0.3s ease;
+
+  @media screen and (max-width: 767px) {
+    top: 35%;
+  }
+  @media screen and (min-width: 768px) {
+    top: 30%;
+  }
+  @media screen and (min-width: 1023px) {
+    top: 50%;
+  }
+  @media screen and (min-width: 2560px) {
+    top: 30%;
+  }
 }
 
 input,

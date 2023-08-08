@@ -5,7 +5,8 @@ import { PixabayAPI } from './pixabay-api';
 
 const refs = {
   body: document.querySelector('body'),
-  logo: document.querySelector('.logo'),
+  header: document.querySelector('header'),
+  logoDiv: document.querySelector('.logo-container'),
   form: document.getElementById('search-form'),
   input: document.querySelector('.search-input'),
   button: document.querySelector('.search-button'),
@@ -30,8 +31,9 @@ refs.form.addEventListener('submit', handleSearchFormSubmit);
 async function handleSearchFormSubmit(event) {
   event.preventDefault();
   refs.body.classList.remove('animation');
+  refs.header.classList.remove('hidden');
   refs.target.classList.remove('hidden');
-  refs.logo.classList.add('hidden');
+  refs.logoDiv.classList.add('hidden');
   refs.instruction.classList.add('hidden');
   refs.currentPage = 1;
   fetchDataByInputValue();
